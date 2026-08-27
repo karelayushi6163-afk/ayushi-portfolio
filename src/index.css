@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme (default) — RGB triplets consumed by tailwind.config.js */
+    --canvas: 10 14 23; /* ink-900 */
+    --surface: 16 21 31; /* ink-800 */
+    --fg-primary: 231 234 242; /* mist-100/200 */
+    --fg-secondary: 199 205 221; /* mist-300 */
+    --fg-muted: 139 147 167; /* mist-400 */
+    --fg-faint: 107 115 134; /* mist-500 */
+  }
+
+  html.light {
+    /* Light theme overrides */
+    --canvas: 244 246 251; /* mist-100 */
+    --surface: 255 255 255;
+    --fg-primary: 10 14 23; /* ink-900 */
+    --fg-secondary: 42 51 70; /* ink-500 */
+    --fg-muted: 91 99 120;
+    --fg-faint: 118 126 145;
+  }
+
+  * {
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    @apply bg-canvas text-fg font-body antialiased transition-colors duration-300;
+  }
+
+  ::selection {
+    @apply bg-signal-blue/30 text-white;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-ink-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ink-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-signal-blue/60;
+  }
+
+  /* Visible keyboard focus for accessibility */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #5b8def;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-10;
+  }
+
+  .glass-panel {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.07] rounded-2xl;
+  }
+
+  html.light .glass-panel {
+    @apply bg-white/70 border-black/[0.06];
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs tracking-[0.2em] uppercase text-signal-blue/90;
+  }
+
+  .heading-2 {
+    @apply font-display text-3xl sm:text-4xl font-semibold text-fg tracking-tight;
+  }
+
+  .brand-mark {
+    @apply text-fg;
+  }
+
+  .body-muted {
+    @apply text-fg-muted leading-relaxed;
+  }
+}
